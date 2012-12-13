@@ -1,0 +1,25 @@
+{% extends "base_header.html" %}
+{% block page_content %}
+  {% load markup %}
+      <!-- Main hero unit for a primary marketing message or call to action -->
+      <div class="row">
+        <div class="hero-unit span3">
+          <img src='/static/bootstrap/img/profile_pic.jpeg' width="250" class="img-polaroid" align="left"/>
+        </div>
+        <div class="hero-unit span9">
+          <h1><a href="/about">Christopher M. Brown</a></h1>
+          <p>I am a PhD candidate in the Political Science Department at the University of Pennsylvania interested in studying Congress, coding in Python, building+analyzing large datasets, and encouraging transparency in government</p>
+        </div>
+    </div>
+      <!-- Example row of columns -->
+      <div class="row-fluid">
+        {% for topic in topic_list %}
+          <div class="span3 test-unit">
+            <h2><a href="/{{ topic.url }}">{{ topic.topic_title}}</a></h2>
+            <p>{{ topic.topic_description|markdown }}</p>
+          </div>
+        {% endfor %}
+      </div>
+      <br>
+  {% endblock %}
+

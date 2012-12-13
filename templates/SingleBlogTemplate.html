@@ -1,0 +1,46 @@
+{% extends "base_header.html" %}
+{% block page_content %}
+    {% load markup %}
+    <div class="container">
+      <div class="row">
+        <div class="span3" style="position:fixed;">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li class="nav-header-blog">Recent Posts</li>
+              {% for post in recentposts %}
+                  <li class="nav-link"><a href="#">{{ post.title }}</a></li>
+              {% endfor %}
+              <li class="nav-header-blog">What I'm Reading</li>
+              {% for link in links %}
+                <li class="nav-link"><a href="{{ link.link }}" rel="tooltip" data-placement="top" data-original-title="{{ link.description }}">{{ link.title }}</a></li>
+              {% endfor %}
+              
+              {% if posts.object_list and posts.paginator.num_pages > 1 %}
+              <li class="nav-header-blog">Navigate Posts</li>
+                      {% if posts.has_previous %}
+                          <li class="nav-link"><a href= "?page={{ posts.previous_page_number }}">&lt;&lt; Newer Posts </a></li>
+                      {% endif %}
+
+                      {% if posts.has_next %}
+                          <li class="nav-link"><a href="?page={{ posts.next_page_number }}">Older Posts &gt;&gt;</a></li>
+                      {% endif %}
+              {% endif %}
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->
+        <div class="span9 blog-posts offset3">
+          <ul>
+              <div class="blog-title"><a href="/blog/post_num/{{ post.id }}">{{ post.title }}</a></div>
+              <ul>
+                  <div class="blog-time">{{ post.created }}</div>
+                  <div class="body-blog">{{ post.body|markdown }}</div>
+              </ul>
+          </ul>
+        </div><!--/span-->
+      </div><!--/row-->
+
+    </div><!--/.fluid-container-->
+
+    <!-- Next/Prev page links  -->
+
+{% endblock %}
